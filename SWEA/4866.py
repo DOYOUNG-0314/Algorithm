@@ -1,25 +1,25 @@
 T = int(input())
-for tc in range(1, T + 1):
-    line = input().strip()
-    stack = []
-    ok = 1
-
-    for ch in line:
-        if ch in "{(":
+for test_case in range(1,T+1):
+    c = input()
+    stack=[]
+    ans = 0
+    for ch in c:
+        if ch =='(' or ch == '{':
             stack.append(ch)
-        elif ch == "}":
-            if not stack or stack[-1] != "{":
-                ok = 0
+        elif ch ==')':
+            if stack and stack[-1] == '(':
+                ans = 1
+                stack.pop(-1)
+            else:
+                ans = 0
+                break 
+        elif ch =='}':
+            if stack and stack[-1] == '{':
+                ans = 1
+                stack.pop(-1)
+            else:
+                ans = 0
                 break
-            stack.pop()
-        elif ch == ")":
-            if not stack or stack[-1] != "(":
-                ok = 0
-                break
-            stack.pop()
-        # 다른 문자는 무시
-
-    if stack:
-        ok = 0
-
-    print(f"#{tc} {ok}")
+    if stack :
+        ans = 0
+    print(f"#{test_case} {ans}")        
